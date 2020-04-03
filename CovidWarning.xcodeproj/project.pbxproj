@@ -14,6 +14,7 @@
 		9315261E2437814A00F07524 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9315261D2437814A00F07524 /* Assets.xcassets */; };
 		931526212437814A00F07524 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9315261F2437814A00F07524 /* LaunchScreen.storyboard */; };
 		C810B204F89367AB167E2F4D /* CBManagerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C810BB8BAA0141EF1C359442 /* CBManagerState.swift */; };
+		C810B2F60C494A9FCFC53335 /* CLProximity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C810B1188DE7549B3D501CC9 /* CLProximity.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		9315261D2437814A00F07524 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		931526202437814A00F07524 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		931526222437814A00F07524 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C810B1188DE7549B3D501CC9 /* CLProximity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLProximity.swift; sourceTree = "<group>"; };
 		C810BB8BAA0141EF1C359442 /* CBManagerState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CBManagerState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -106,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				C810BB8BAA0141EF1C359442 /* CBManagerState.swift */,
+				C810B1188DE7549B3D501CC9 /* CLProximity.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -185,6 +188,7 @@
 				931526152437814900F07524 /* AppDelegate.swift in Sources */,
 				931526172437814900F07524 /* SceneDelegate.swift in Sources */,
 				C810B204F89367AB167E2F4D /* CBManagerState.swift in Sources */,
+				C810B2F60C494A9FCFC53335 /* CLProximity.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

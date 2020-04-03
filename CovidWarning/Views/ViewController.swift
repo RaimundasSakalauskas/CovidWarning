@@ -88,23 +88,35 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, CLLocationM
     func locationManager(_ manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], in region: CLBeaconRegion) {
         print("didRangeBeacons \(beacons), region: \(region)")
 
-        var distance:CLLocationAccuracy?
-        var rssi: Int = 0
+        var nearestBeacon: CLBeacon?
         for beacon in beacons {
-            if (beacon.accuracy > 0 && (distance == nil || beacon.accuracy < distance!)) {
-                distance = beacon.accuracy
-                rssi = beacon.rssi
+            if nearestBeacon == nil {
+                nearestBeacon = beacon
+            } else if beacon.accuracy > 0 && beacon.accuracy < nearestBeacon!.accuracy {
+                nearestBeacon = beacon
             }
         }
 
         DispatchQueue.main.async { [weak self] in
-           if let distance = distance {
-               self?.proximityLabel.text = String(format: "%.2fm\r\n%idb", distance, rssi)
+           if let nearestBeacon = nearestBeacon {
+               let distance = self?.getDistance(rssi: nearestBeacon.rssi, txPower: -60)
+               self?.proximityLabel.text = String(format: "proximity: %@\r\ndistance: %.2fm +-%.2fm\r\nrssi: %idb", nearestBeacon.proximity.debugDescription, distance!, nearestBeacon.accuracy, nearestBeacon.rssi)
            } else {
                self?.proximityLabel.text = "Unknown"
 
            }
         }
+    }
+
+    func getDistance(rssi: Int, txPower: Double) -> Double {
+        /*
+         * RSSI = TxPower - 10 * n * lg(d)
+         * n = 2 (in free space)
+         *
+         * d = 10 ^ ((TxPower - RSSI) / (10 * n))
+         */
+
+        return pow(10.0, (txPower - Double(rssi)) / (10 * 2))
     }
 
     @available(iOS 13, *)
