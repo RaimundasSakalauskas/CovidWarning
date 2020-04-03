@@ -56,15 +56,39 @@
 		931526132437814900F07524 /* CovidWarning */ = {
 			isa = PBXGroup;
 			children = (
+				9315262A2437837400F07524 /* Assets */,
+				931526292437836200F07524 /* Supporting Files */,
+				931526282437835400F07524 /* Views */,
+			);
+			path = CovidWarning;
+			sourceTree = "<group>";
+		};
+		931526282437835400F07524 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9315261A2437814900F07524 /* Main.storyboard */,
+				931526182437814900F07524 /* ViewController.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		931526292437836200F07524 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
 				931526142437814900F07524 /* AppDelegate.swift */,
 				931526162437814900F07524 /* SceneDelegate.swift */,
-				931526182437814900F07524 /* ViewController.swift */,
-				9315261A2437814900F07524 /* Main.storyboard */,
-				9315261D2437814A00F07524 /* Assets.xcassets */,
 				9315261F2437814A00F07524 /* LaunchScreen.storyboard */,
 				931526222437814A00F07524 /* Info.plist */,
 			);
-			path = CovidWarning;
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9315262A2437837400F07524 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				9315261D2437814A00F07524 /* Assets.xcassets */,
+			);
+			path = Assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -216,7 +240,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -270,7 +294,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -285,13 +309,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2UTD9WU3UT;
-				INFOPLIST_FILE = CovidWarning/Info.plist;
+				INFOPLIST_FILE = "CovidWarning/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.pinstudios.covidwarning.CovidWarning;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pinstudios.covidwarning;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -303,13 +329,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2UTD9WU3UT;
-				INFOPLIST_FILE = CovidWarning/Info.plist;
+				INFOPLIST_FILE = "CovidWarning/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.pinstudios.covidwarning.CovidWarning;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pinstudios.covidwarning;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
