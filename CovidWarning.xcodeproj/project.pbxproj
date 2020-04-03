@@ -13,6 +13,7 @@
 		9315261C2437814900F07524 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9315261A2437814900F07524 /* Main.storyboard */; };
 		9315261E2437814A00F07524 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9315261D2437814A00F07524 /* Assets.xcassets */; };
 		931526212437814A00F07524 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9315261F2437814A00F07524 /* LaunchScreen.storyboard */; };
+		C810B204F89367AB167E2F4D /* CBManagerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C810BB8BAA0141EF1C359442 /* CBManagerState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		9315261D2437814A00F07524 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		931526202437814A00F07524 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		931526222437814A00F07524 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C810BB8BAA0141EF1C359442 /* CBManagerState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CBManagerState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,8 @@
 		931526132437814900F07524 /* CovidWarning */ = {
 			isa = PBXGroup;
 			children = (
+				9315262D24378AD000F07524 /* Extensions */,
+				9315262C24378AA400F07524 /* Model */,
 				9315262A2437837400F07524 /* Assets */,
 				931526292437836200F07524 /* Supporting Files */,
 				931526282437835400F07524 /* Views */,
@@ -89,6 +93,21 @@
 				9315261D2437814A00F07524 /* Assets.xcassets */,
 			);
 			path = Assets;
+			sourceTree = "<group>";
+		};
+		9315262C24378AA400F07524 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		9315262D24378AD000F07524 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C810BB8BAA0141EF1C359442 /* CBManagerState.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -165,6 +184,7 @@
 				931526192437814900F07524 /* ViewController.swift in Sources */,
 				931526152437814900F07524 /* AppDelegate.swift in Sources */,
 				931526172437814900F07524 /* SceneDelegate.swift in Sources */,
+				C810B204F89367AB167E2F4D /* CBManagerState.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
