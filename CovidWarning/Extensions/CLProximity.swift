@@ -17,6 +17,9 @@ extension CLProximity: CustomDebugStringConvertible {
                 return "near"
             case .far:
                 return "far"
+        @unknown default:
+                 NSLog("New value was introduced here.")
+                 return "unknown"
         }
     }
 }

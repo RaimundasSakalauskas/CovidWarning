@@ -52,6 +52,9 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, CLLocationM
                         startMonitoring()
                     }
                 }
+            @unknown default:
+                NSLog("New value was introduced here.")
+                break
         }
     }
 

@@ -20,7 +20,10 @@ extension CBManagerState: CustomDebugStringConvertible {
             case .unauthorized:
                 return "unauthorized"
             case .unknown:
+                fallthrough
+            @unknown default:
+                NSLog("New value was introduced here.")
                 return "unknown"
-        }
+            }
     }
 }
