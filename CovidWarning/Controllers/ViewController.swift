@@ -13,15 +13,9 @@ import CoreLocation
 
 class ViewController: UIViewController, CBPeripheralManagerDelegate, CLLocationManagerDelegate {
     @IBOutlet weak var proximityLabel: UILabel!
-    
-    let proximityUUID = UUID(uuidString:"D9882F69-32E7-41AC-B38D-E55699FC1905")
-    let major: CLBeaconMajorValue = 100
-    let minor: CLBeaconMinorValue = 1
-    let beaconID = "com.example.myDeviceRegion"
 
     var peripheral: CBPeripheralManager!
     var locationManager: CLLocationManager!
-    var beaconRegion: CLBeaconRegion!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,12 +24,6 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, CLLocationM
 
         locationManager = CLLocationManager()
         locationManager.delegate = self
-
-        if #available(iOS 13, *) {
-            beaconRegion = CLBeaconRegion(uuid: proximityUUID!, major: major, minor: minor, identifier: beaconID)
-        } else {
-            beaconRegion = CLBeaconRegion(proximityUUID: proximityUUID!, major: major, minor: minor, identifier: beaconID)
-        }
 
         proximityLabel.text = "Unknown"
     }
@@ -68,10 +56,9 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, CLLocationM
     }
 
     private func startMonitoring() {
-        print("locationManager.monitoredRegions.contains(beaconRegion) = \(locationManager.monitoredRegions.contains(beaconRegion))")
-        //if !locationManager.monitoredRegions.contains(beaconRegion) {
-            locationManager.startMonitoring(for: beaconRegion)
-            locationManager.startRangingBeacons(in: beaconRegion)
+        //if !locationManager.monitoredRegions.contains(BeaconRegionFactory.sharedBeacon) {
+            locationManager.startMonitoring(for: BeaconRegionFactory.sharedBeaconRegion)
+            locationManager.startRangingBeacons(in: BeaconRegionFactory.sharedBeaconRegion)
         //}
     }
 
@@ -139,7 +126,7 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, CLLocationM
         print("peripheral.state = \(peripheral.state)")
         switch peripheral.state {
             case .poweredOn:
-                advertiseDevice(region: beaconRegion)
+                advertiseDevice(region: BeaconRegionFactory.sharedBeaconRegion)
             default:
                 //do nothing
                 break

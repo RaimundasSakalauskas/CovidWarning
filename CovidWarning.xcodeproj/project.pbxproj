@@ -14,6 +14,7 @@
 		9315261E2437814A00F07524 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9315261D2437814A00F07524 /* Assets.xcassets */; };
 		C810B204F89367AB167E2F4D /* CBManagerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C810BB8BAA0141EF1C359442 /* CBManagerState.swift */; };
 		C810B2F60C494A9FCFC53335 /* CLProximity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C810B1188DE7549B3D501CC9 /* CLProximity.swift */; };
+		C810B6DD5BF7D9C093FB6620 /* BeaconRegionFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C810B90F7855387F7DF683C6 /* BeaconRegionFactory.swift */; };
 		C810BC0BC4FA8F7C2D03CE01 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C810BA85A7E404AFA3A76720 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -26,6 +27,7 @@
 		9315261D2437814A00F07524 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		931526222437814A00F07524 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C810B1188DE7549B3D501CC9 /* CLProximity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLProximity.swift; sourceTree = "<group>"; };
+		C810B90F7855387F7DF683C6 /* BeaconRegionFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconRegionFactory.swift; sourceTree = "<group>"; };
 		C810BA85A7E404AFA3A76720 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C810BB8BAA0141EF1C359442 /* CBManagerState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CBManagerState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -67,6 +69,7 @@
 				9315262A2437837400F07524 /* Resources */,
 				931526292437836200F07524 /* Supporting Files */,
 				931526282437835400F07524 /* Views */,
+				C810B449CF79369051F0EA81 /* Helpers */,
 			);
 			path = CovidWarning;
 			sourceTree = "<group>";
@@ -127,6 +130,14 @@
 			children = (
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		C810B449CF79369051F0EA81 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				C810B90F7855387F7DF683C6 /* BeaconRegionFactory.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -205,6 +216,7 @@
 				931526172437814900F07524 /* SceneDelegate.swift in Sources */,
 				C810B204F89367AB167E2F4D /* CBManagerState.swift in Sources */,
 				C810B2F60C494A9FCFC53335 /* CLProximity.swift in Sources */,
+				C810B6DD5BF7D9C093FB6620 /* BeaconRegionFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
