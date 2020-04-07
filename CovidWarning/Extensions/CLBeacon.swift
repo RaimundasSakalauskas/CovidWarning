@@ -7,6 +7,7 @@ import Foundation
 import CoreLocation
 
 extension CLBeacon {
+    //Apple discourages use of `accuracy` property therefore adding our own method to get distance
     func getDistance(txPower: Double) -> Double {
         /*
          * RSSI = TxPower - 10 * n * lg(d)
