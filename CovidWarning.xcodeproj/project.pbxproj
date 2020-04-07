@@ -13,6 +13,7 @@
 		9315261C2437814900F07524 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9315261A2437814900F07524 /* Main.storyboard */; };
 		9315261E2437814A00F07524 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9315261D2437814A00F07524 /* Assets.xcassets */; };
 		93152675243BCBFB00F07524 /* BeaconRegionFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93152674243BCBFB00F07524 /* BeaconRegionFactoryTests.swift */; };
+		93152678243D2CC100F07524 /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93152677243D2CC100F07524 /* BlurView.swift */; };
 		C810B0DCE043A23EA9C8DB11 /* MonitoringManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C810B93B4C4D8C2CC2C7DA02 /* MonitoringManager.swift */; };
 		C810B204F89367AB167E2F4D /* CBManagerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C810BB8BAA0141EF1C359442 /* CBManagerState.swift */; };
 		C810B2AC0209CE78B78565B5 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C810BB8D49BD3C13F22ADFDA /* UIColor.swift */; };
@@ -46,6 +47,7 @@
 		93152666243BCB8900F07524 /* CovidWarningTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CovidWarningTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9315266A243BCB8900F07524 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		93152674243BCBFB00F07524 /* BeaconRegionFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconRegionFactoryTests.swift; sourceTree = "<group>"; };
+		93152677243D2CC100F07524 /* BlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
 		C810B1188DE7549B3D501CC9 /* CLProximity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLProximity.swift; sourceTree = "<group>"; };
 		C810B49C1F23281686BE1DEF /* CLBeacon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLBeacon.swift; sourceTree = "<group>"; };
 		C810B7F6D6AD142039EE4411 /* BroadcastingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BroadcastingManager.swift; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 				C810B1188DE7549B3D501CC9 /* CLProximity.swift */,
 				C810B49C1F23281686BE1DEF /* CLBeacon.swift */,
 				C810BB8D49BD3C13F22ADFDA /* UIColor.swift */,
+				93152677243D2CC100F07524 /* BlurView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -324,6 +327,7 @@
 				C810B0DCE043A23EA9C8DB11 /* MonitoringManager.swift in Sources */,
 				C810B8DC1B9C92A2715C35AC /* BroadcastingManager.swift in Sources */,
 				C810B99E7E5F54CB284423D3 /* AuthorizationStatus.swift in Sources */,
+				93152678243D2CC100F07524 /* BlurView.swift in Sources */,
 				C810BC8BAAF3CAFDBB8A7CE7 /* ManagerStatus.swift in Sources */,
 				C810BEE73856900F30A816F6 /* CLBeacon.swift in Sources */,
 				C810B2AC0209CE78B78565B5 /* UIColor.swift in Sources */,
