@@ -13,130 +13,133 @@ import CoreLocation
 
 class ViewController : UIViewController, BroadcastingManagerDelegate, MonitoringManagerDelegate {
     @IBOutlet weak var proximityLabel: UILabel!
-
-    var peripheral: CBPeripheralManager!
-    var locationManager: CLLocationManager!
-
+    @IBOutlet weak var broadcastingLabel: UILabel!
+    @IBOutlet weak var monitoringLabel: UILabel!
+        
+    private var broadcastingManager: BroadcastingManager!
+    private var monitoringManager: MonitoringManager!  
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        peripheral = CBPeripheralManager(delegate: self, queue: nil)
+        broadcastingManager = BroadcastingManager()
+        broadcastingManager.delegate = self
 
-        locationManager = CLLocationManager()
-        locationManager.delegate = self
+        monitoringManager = MonitoringManager()
+        monitoringManager.delegate = self
 
         proximityLabel.text = "Unknown"
+        monitoringLabel.text = "Monitoring disabled"
+        broadcastingLabel.text = "Not broadcasting position"
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
+        evalBroadcastingManagerAuthorization()
         evalLocationManagerAuthorization()
     }
 
+
+
+
+
     private func evalLocationManagerAuthorization() {
-        switch CLLocationManager.authorizationStatus() {
+        let authorizationState = monitoringManager.getAuthorizationStatus()
+
+        NSLog("evalLocationManagerAuthorization = \(authorizationState)")
+        var statusText: String?
+
+        switch authorizationState {
+            case .authorized:
+                statusText = "Monitoring enabled"
+                monitoringManager.startMonitoring(region: BeaconRegionFactory.sharedBeaconRegion)
             case .notDetermined:
-                locationManager.requestWhenInUseAuthorization()
+                statusText = "Monitoring disabled"
+                //trigger authorization request
+                monitoringManager.prepare()
             case .restricted:
-                //do nothing
-                break
+                statusText = "Location Services are restricted. Ask your manager to enable it."
             case .denied:
-                //do nothing
-                break
-            case .authorizedAlways, .authorizedWhenInUse:
-                print("CLLocationManager.isMonitoringAvailable(for: CLBeaconRegion.self) = \(CLLocationManager.isMonitoringAvailable(for: CLBeaconRegion.self))")
-                if CLLocationManager.isMonitoringAvailable(for: CLBeaconRegion.self) {
-                    print("CLLocationManager.isRangingAvailable() = \(CLLocationManager.isRangingAvailable())")
-                    if CLLocationManager.isRangingAvailable() {
-                        startMonitoring()
-                    }
-                }
-            @unknown default:
-                NSLog("New value was introduced here.")
-                break
+                statusText = "Please enable Location Services permission for this app. You can do this in settings"
+        }
+
+        DispatchQueue.main.async { [weak self, statusText] in
+            self?.monitoringLabel.text = statusText
         }
     }
 
-    private func startMonitoring() {
-        //if !locationManager.monitoredRegions.contains(BeaconRegionFactory.sharedBeacon) {
-            locationManager.startMonitoring(for: BeaconRegionFactory.sharedBeaconRegion)
-            locationManager.startRangingBeacons(in: BeaconRegionFactory.sharedBeaconRegion)
-        //}
+    private func evalBroadcastingManagerAuthorization() {
+        let managerState = broadcastingManager.getManagerStatus()
+        let authorizationState = broadcastingManager.getAuthorizationStatus()
+
+        NSLog("evalBroadcastingManagerAuthorization = \(authorizationState) managerState = \(managerState)")
+
+        var statusText = "Not broadcasting position"
+
+        //we shouldn't advertise if at least one of these conditions is false
+        if (managerState != .ready && broadcastingManager.isAdvertising()) {
+            broadcastingManager.stopAdvertising()
+        }
+
+        switch authorizationState {
+            case .authorized:
+                broadcastingManager.prepare()
+
+                if (managerState == .ready) {
+                    statusText = "Broadcasting position"
+
+                    //start advertising
+                    if (!broadcastingManager.isAdvertising()) {
+                        broadcastingManager.startAdvertising(region: BeaconRegionFactory.sharedBeaconRegion)
+                    }
+                } else if (managerState == .poweredOff) {
+                    statusText = "Bluetooth is turned off. Please power it on."
+                }
+            case .notDetermined:
+                //trigger authorization request
+                broadcastingManager.prepare()
+            case .restricted:
+                statusText = "Bluetooth is restricted. Ask your manager to enable it."
+            case .denied:
+                statusText = "Please enable bluetooth permission for this app. You can do this in settings"
+        }
+
+        DispatchQueue.main.async { [weak self, statusText] in
+            self?.broadcastingLabel.text = statusText
+        }
     }
 
-
-    //MARK: CLLocationManagerDelegate
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        self.evalLocationManagerAuthorization()
+    //MARK: MonitoringManagerDelegate
+    func didChangeAuthorizationStatus(manager: MonitoringManager, status: AuthorizationStatus) {
+        DispatchQueue.main.async { [weak self] in
+            self?.evalLocationManagerAuthorization()
+        }
     }
 
-    func locationManager(_ manager: CLLocationManager, didStartMonitoringFor region: CLRegion) {
-        print("didStartMonitoringFor: \(region)")
-    }
-
-    func locationManager(_ manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], in region: CLBeaconRegion) {
-        print("didRangeBeacons \(beacons), region: \(region)")
-
-        var nearestBeacon: CLBeacon?
-        for beacon in beacons {
-            if nearestBeacon == nil {
-                nearestBeacon = beacon
-            } else if beacon.accuracy > 0 && beacon.accuracy < nearestBeacon!.accuracy {
-                nearestBeacon = beacon
+    func didMonitorBeacon(manager: MonitoringManager, beacons: [CLBeacon], nearestBeacon: CLBeacon?) {
+        DispatchQueue.main.async { [weak self, nearestBeacon] in
+            if let nearestBeacon = nearestBeacon {
+                let distance = nearestBeacon.getDistance(txPower: -60)
+                self?.proximityLabel.text = String(format: "distance: %.2fm", distance)
+            } else {
+                self?.proximityLabel.text = "Unknown"
             }
         }
+    }
 
+    //MARK: BroadcastingManagerDelegate
+    func didChangeAuthorizationStatus(manager: BroadcastingManager, status: AuthorizationStatus) {
         DispatchQueue.main.async { [weak self] in
-           if let nearestBeacon = nearestBeacon {
-               let distance = self?.getDistance(rssi: nearestBeacon.rssi, txPower: -60)
-               self?.proximityLabel.text = String(format: "proximity: %@\r\ndistance: %.2fm +-%.2fm\r\nrssi: %idb", nearestBeacon.proximity.debugDescription, distance!, nearestBeacon.accuracy, nearestBeacon.rssi)
-           } else {
-               self?.proximityLabel.text = "Unknown"
-
-           }
+            self?.evalBroadcastingManagerAuthorization()
         }
     }
 
-    func getDistance(rssi: Int, txPower: Double) -> Double {
-        /*
-         * RSSI = TxPower - 10 * n * lg(d)
-         * n = 2 (in free space)
-         *
-         * d = 10 ^ ((TxPower - RSSI) / (10 * n))
-         */
-
-        return pow(10.0, (txPower - Double(rssi)) / (10 * 2))
-    }
-
-    @available(iOS 13, *)
-    func locationManager(_ manager: CLLocationManager, didRange beacons: [CLBeacon], satisfying beaconConstraint: CLBeaconIdentityConstraint) {
-        print("didRange \(beacons), beaconConstraint: \(beaconConstraint)")
-        print("beaconConstraint = \(beaconConstraint)")
-    }
-
-    //MARK: CBPeripheralManagerDelegate
-    func advertiseDevice(region : CLBeaconRegion) {
-        let peripheralData = region.peripheralData(withMeasuredPower: nil)
-        peripheral.startAdvertising(((peripheralData as NSDictionary) as! [String : Any]))
-    }
-
-    func peripheralManagerDidStartAdvertising(_ peripheral: CBPeripheralManager, error: Error?) {
-        print("peripheralManagerDidStartAdvertising: \(peripheral)")
-    }
-
-    func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
-        print("peripheral.state = \(peripheral.state)")
-        switch peripheral.state {
-            case .poweredOn:
-                advertiseDevice(region: BeaconRegionFactory.sharedBeaconRegion)
-            default:
-                //do nothing
-                break
+    func didChangeManagerStatus(manager: BroadcastingManager, status: ManagerStatus) {
+        DispatchQueue.main.async { [weak self] in
+            self?.evalBroadcastingManagerAuthorization()
         }
     }
-
-
 }
 
 

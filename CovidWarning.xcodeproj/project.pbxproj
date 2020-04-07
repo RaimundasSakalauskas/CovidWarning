@@ -13,10 +13,14 @@
 		9315261C2437814900F07524 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9315261A2437814900F07524 /* Main.storyboard */; };
 		9315261E2437814A00F07524 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9315261D2437814A00F07524 /* Assets.xcassets */; };
 		93152675243BCBFB00F07524 /* BeaconRegionFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93152674243BCBFB00F07524 /* BeaconRegionFactoryTests.swift */; };
+		C810B0DCE043A23EA9C8DB11 /* MonitoringManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C810B93B4C4D8C2CC2C7DA02 /* MonitoringManager.swift */; };
 		C810B204F89367AB167E2F4D /* CBManagerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C810BB8BAA0141EF1C359442 /* CBManagerState.swift */; };
 		C810B2F60C494A9FCFC53335 /* CLProximity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C810B1188DE7549B3D501CC9 /* CLProximity.swift */; };
 		C810B6DD5BF7D9C093FB6620 /* BeaconRegionFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C810B90F7855387F7DF683C6 /* BeaconRegionFactory.swift */; };
+		C810B8DC1B9C92A2715C35AC /* BroadcastingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C810B7F6D6AD142039EE4411 /* BroadcastingManager.swift */; };
+		C810B99E7E5F54CB284423D3 /* AuthorizationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = C810BF11A80030677CEC44C3 /* AuthorizationStatus.swift */; };
 		C810BC0BC4FA8F7C2D03CE01 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C810BA85A7E404AFA3A76720 /* LaunchScreen.storyboard */; };
+		C810BC8BAAF3CAFDBB8A7CE7 /* ManagerStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = C810B9E9C0914BB4A262EC3C /* ManagerStatus.swift */; };
 		C810BEE73856900F30A816F6 /* CLBeacon.swift in Sources */ = {isa = PBXBuildFile; fileRef = C810B49C1F23281686BE1DEF /* CLBeacon.swift */; };
 /* End PBXBuildFile section */
 
@@ -43,9 +47,13 @@
 		93152674243BCBFB00F07524 /* BeaconRegionFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconRegionFactoryTests.swift; sourceTree = "<group>"; };
 		C810B1188DE7549B3D501CC9 /* CLProximity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLProximity.swift; sourceTree = "<group>"; };
 		C810B49C1F23281686BE1DEF /* CLBeacon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLBeacon.swift; sourceTree = "<group>"; };
+		C810B7F6D6AD142039EE4411 /* BroadcastingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BroadcastingManager.swift; sourceTree = "<group>"; };
 		C810B90F7855387F7DF683C6 /* BeaconRegionFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconRegionFactory.swift; sourceTree = "<group>"; };
+		C810B93B4C4D8C2CC2C7DA02 /* MonitoringManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonitoringManager.swift; sourceTree = "<group>"; };
+		C810B9E9C0914BB4A262EC3C /* ManagerStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagerStatus.swift; sourceTree = "<group>"; };
 		C810BA85A7E404AFA3A76720 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C810BB8BAA0141EF1C359442 /* CBManagerState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CBManagerState.swift; sourceTree = "<group>"; };
+		C810BF11A80030677CEC44C3 /* AuthorizationStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationStatus.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +137,8 @@
 		9315262C24378AA400F07524 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				C810BF11A80030677CEC44C3 /* AuthorizationStatus.swift */,
+				C810B9E9C0914BB4A262EC3C /* ManagerStatus.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -195,6 +205,8 @@
 			isa = PBXGroup;
 			children = (
 				C810B90F7855387F7DF683C6 /* BeaconRegionFactory.swift */,
+				C810B93B4C4D8C2CC2C7DA02 /* MonitoringManager.swift */,
+				C810B7F6D6AD142039EE4411 /* BroadcastingManager.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -306,6 +318,10 @@
 				C810B204F89367AB167E2F4D /* CBManagerState.swift in Sources */,
 				C810B2F60C494A9FCFC53335 /* CLProximity.swift in Sources */,
 				C810B6DD5BF7D9C093FB6620 /* BeaconRegionFactory.swift in Sources */,
+				C810B0DCE043A23EA9C8DB11 /* MonitoringManager.swift in Sources */,
+				C810B8DC1B9C92A2715C35AC /* BroadcastingManager.swift in Sources */,
+				C810B99E7E5F54CB284423D3 /* AuthorizationStatus.swift in Sources */,
+				C810BC8BAAF3CAFDBB8A7CE7 /* ManagerStatus.swift in Sources */,
 				C810BEE73856900F30A816F6 /* CLBeacon.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
