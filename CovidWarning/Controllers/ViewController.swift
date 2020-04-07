@@ -8,8 +8,7 @@
 
 import UIKit
 import CoreLocation
-import CoreBluetooth
-import CoreLocation
+import AudioToolbox
 
 class ViewController : UIViewController, BroadcastingManagerDelegate, MonitoringManagerDelegate {
     @IBOutlet weak var proximityLabel: UILabel!
@@ -18,7 +17,10 @@ class ViewController : UIViewController, BroadcastingManagerDelegate, Monitoring
         
     private var broadcastingManager: BroadcastingManager!
     private var monitoringManager: MonitoringManager!  
-    
+
+    private var lastEncounterDate: Date?
+    private var resetBackgroundTask: DispatchWorkItem?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -28,7 +30,7 @@ class ViewController : UIViewController, BroadcastingManagerDelegate, Monitoring
         monitoringManager = MonitoringManager()
         monitoringManager.delegate = self
 
-        proximityLabel.text = "Unknown"
+        proximityLabel.text = "Distance: Unknown"
         monitoringLabel.text = "Monitoring disabled"
         broadcastingLabel.text = "Not broadcasting position"
     }
@@ -38,11 +40,42 @@ class ViewController : UIViewController, BroadcastingManagerDelegate, Monitoring
 
         evalBroadcastingManagerAuthorization()
         evalLocationManagerAuthorization()
+
+        UIApplication.shared.isIdleTimerDisabled = true
+    }
+
+    private func triggerTooClose() {
+        if (lastEncounterDate == nil || Date().timeIntervalSince(lastEncounterDate!) > 1) {
+            AudioServicesPlayAlertSoundWithCompletion(SystemSoundID(kSystemSoundID_Vibrate)) { }
+        }
+        lastEncounterDate = Date()
+        highlightBackground()
+
+        if let resetBackgroundTask = resetBackgroundTask {
+            resetBackgroundTask.cancel()
+            self.resetBackgroundTask = nil
+        }
+
+        resetBackgroundTask = DispatchWorkItem { [weak self] in self?.resetBackground() }
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(5), execute: resetBackgroundTask!)
+    }
+
+    private func highlightBackground() {
+        UIView.animate(withDuration: 0.25) { () -> Void in
+            self.view.backgroundColor = UIColor(rgb: 0xC94545)
+        }
     }
 
 
-
-
+    private func resetBackground() {
+        UIView.animate(withDuration: 0.25) { () -> Void in
+            if #available(iOS 13.0, *) {
+                self.view.backgroundColor = UIColor.systemBackground
+            } else {
+                self.view.backgroundColor = UIColor.white
+            }
+        }
+    }
 
     private func evalLocationManagerAuthorization() {
         let authorizationState = monitoringManager.getAuthorizationStatus()
@@ -119,14 +152,21 @@ class ViewController : UIViewController, BroadcastingManagerDelegate, Monitoring
 
     func didMonitorBeacon(manager: MonitoringManager, beacons: [CLBeacon], nearestBeacon: CLBeacon?) {
         DispatchQueue.main.async { [weak self, nearestBeacon] in
-            if let nearestBeacon = nearestBeacon {
-                let distance = nearestBeacon.getDistance(txPower: -60)
-                self?.proximityLabel.text = String(format: "distance: %.2fm", distance)
+            guard let self = self else {
+                return
+            }
+
+            if let nearestBeacon = nearestBeacon, let distance = nearestBeacon.getDistance(txPower: -60) {
+                self.proximityLabel.text = String(format: "Distance: %.2fm", distance)
+                if (distance < 2) {
+                    self.triggerTooClose()
+                }
             } else {
-                self?.proximityLabel.text = "Unknown"
+                self.proximityLabel.text = "Distance: Unknown"
             }
         }
     }
+
 
     //MARK: BroadcastingManagerDelegate
     func didChangeAuthorizationStatus(manager: BroadcastingManager, status: AuthorizationStatus) {
