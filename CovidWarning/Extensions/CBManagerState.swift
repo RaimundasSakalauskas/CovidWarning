@@ -6,7 +6,7 @@
 import Foundation
 import CoreBluetooth
 
-extension CBManagerState: CustomDebugStringConvertible {
+extension CBManagerState : CustomDebugStringConvertible {
     public var debugDescription: String {
         switch self {
             case .poweredOn:

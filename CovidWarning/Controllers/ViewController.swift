@@ -11,7 +11,7 @@ import CoreLocation
 import CoreBluetooth
 import CoreLocation
 
-class ViewController: UIViewController, CBPeripheralManagerDelegate, CLLocationManagerDelegate {
+class ViewController : UIViewController, BroadcastingManagerDelegate, MonitoringManagerDelegate {
     @IBOutlet weak var proximityLabel: UILabel!
 
     var peripheral: CBPeripheralManager!

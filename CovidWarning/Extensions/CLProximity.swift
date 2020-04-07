@@ -6,7 +6,7 @@
 import Foundation
 import CoreLocation
 
-extension CLProximity: CustomDebugStringConvertible {
+extension CLProximity : CustomDebugStringConvertible {
     public var debugDescription: String {
         switch self {
             case .unknown:
