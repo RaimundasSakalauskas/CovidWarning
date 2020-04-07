@@ -62,7 +62,7 @@ class ViewController : UIViewController, BroadcastingManagerDelegate, Monitoring
 
     private func highlightBackground() {
         UIView.animate(withDuration: 0.25) { () -> Void in
-            self.view.backgroundColor = UIColor(rgb: 0xC94545)
+            self.view.backgroundColor = UIColor(rgb: 0xB52F1C)
         }
     }
 

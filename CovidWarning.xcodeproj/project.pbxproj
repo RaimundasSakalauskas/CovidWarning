@@ -99,7 +99,6 @@
 		931526132437814900F07524 /* CovidWarning */ = {
 			isa = PBXGroup;
 			children = (
-				9315262F2437CD8D00F07524 /* ViewModels */,
 				9315262E2437CD7500F07524 /* Controllers */,
 				9315262D24378AD000F07524 /* Extensions */,
 				9315262C24378AA400F07524 /* Models */,
@@ -165,13 +164,6 @@
 				931526182437814900F07524 /* ViewController.swift */,
 			);
 			path = Controllers;
-			sourceTree = "<group>";
-		};
-		9315262F2437CD8D00F07524 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		93152667243BCB8900F07524 /* CovidWarningTests */ = {
